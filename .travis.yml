@@ -1,3 +1,5 @@
+language: node_js
+
 services:
   - docker
 
@@ -6,3 +8,17 @@ before_install:
 
 script:
   - docker run DEMO_TAG npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: "ASIA3U7FRAWJ5RW6XGMP"
+  secret_access_key:
+    secure: "eOPmWX0QZCg/IGFFrhaP3H1jA5MRFFja4Jcmos8m"
+  region: "us-east-1"
+  app: "docker-react-aws"
+  env: "DockerReactAws-env"
+  bucket_name: "elasticbeanstalk-us-east-1-800955893139"
+  bucket_path: docker
+  on:
+    branch: master
